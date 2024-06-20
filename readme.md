@@ -1,6 +1,6 @@
 ### Chapter01: 创建版本库
 进入某个文件夹: 注意使用的是斜杠“/”，这一点和windows的路径不一样
-
+撒旦打撒打撒啊啊啊啊
 `cd /e/5___Study/Python/14___MMRec/jobs/ConformalPrediction`
 
 - 初始化仓库
