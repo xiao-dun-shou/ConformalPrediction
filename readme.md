@@ -230,7 +230,7 @@
 
     `git pull origin branch_name` 
 
-##### 7.3 分支冲突
+##### 7.3 分支管理：冲突
     
 - 处理方法
 
@@ -275,7 +275,7 @@
     ```
 
 
-##### 7.4 分支合并策略
+##### 7.4 分支管理：分支合并策略
 
 - `Fast forward` 合并
 
@@ -284,7 +284,17 @@
 
     - 缺点：合并后删除分支会丢掉分支信息，不利于查看历史上的分支操作。
     
-    - 注意：合并后，之前的那个分支就不能用了，需要及时删除。
+    - 注意：合并后，之前的那个分支就没有意义了，需要及时删除。
+    
+    - 图示说明
+    ```bash
+    # [Fast forward合并]初始状态
+    A---B---C (master)
+           \
+            D---E (dev)
+    # [Fast forward合并]合并后
+    A---B---C---D---E (master, dev)
+    ```
     
 - `--no-ff` 合并：
 
@@ -294,5 +304,55 @@
   
   `git merge --no-ff -m "merge with no-ff" dev`
 
+    - 特点：合并后，原始分支仍然会保留，可以继续开发。
 
+    - 图示说明
   
+    ```bash
+    # [--no-ff合并]初始状态
+    A---B---C (master)
+           \
+            D---E (dev)
+    # [--no-ff合并]合并后
+    A---B---C------G (master)
+         \    /
+          D---E (dev)
+    ```
+
+##### 7.5 分支管理：BUG修复
+
+本小节将详细介绍在Git中如何高效地处理bug修复，同时保持当前开发工作的连续性。例如：
+当你在一个分支上进行开发工作，但需要临时中断去修复一个bug时，可以使用Git的stash功能将当前工作现场“储藏”起来，之后再恢复继续工作。
+
+- 使用`stash`保存工作现场（目前在dev分支）
+
+  `git stash` 保存后，可以使用`git stash list`查看保存的结果。
+
+- 切换到要修复bug的分支（如master）并创建临时分支，修复BUG后提交
+
+  ```bash
+  git switch master
+  git switch -c issue-101
+  git add readme.txt 
+  git commit -m "fix bug 101"
+  ```
+- 合并修复并删除临时分支
+  ```bash
+  git switch master
+  git merge --no-ff -m "merged bug fix 101" issue-101
+  git branch -d issue-101
+  ```
+  
+- 还原工作现场
+  ```bash
+  git switch dev
+  git stash pop
+  ```
+- 其他开发人员：使用`git cherry-pick`命令将修复提交应用到其他分支，避免重复修复工作
+  ```bash
+  # 4c805e2是之前提交的`commit id`
+  git cherry-pick 4c805e2
+  ```
+  
+##### 7.6 分支管理：新功能
+
