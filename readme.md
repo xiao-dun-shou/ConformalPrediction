@@ -216,13 +216,21 @@
 
     `git merge branch_name` 合并指定分支到当前分支
 
-- 推送分支到远程仓库：
+- 删除分支
 
-    `git push origin branch_name` 推送指定分支到远程仓库
+    `git branch -d branch_name`
+
+- 推送分支到远程仓库
+
+    `git push origin branch_name`
 
 - 拉取远程分支最新代码：
 
-    `git pull origin branch_name` 拉取远程分支最新代码
+    `git pull origin branch_name` 
+
+##### 分支冲突
+    
+    分支冲突处理
 
 
 
