@@ -354,5 +354,64 @@
   git cherry-pick 4c805e2
   ```
   
-##### 7.6 分支管理：新功能
+##### 7.6 分支管理：新功能删除
+
+当需要开发一个新功能时，建议创建一个新的feature分支进行开发，以避免对主分支造成影响。
+
+```bash
+git switch -c new_feature  # 开发新模块
+git add new_feature.py     # 提交了一个新的代码文件
+git commit -m "06211508_newfeature" # 提交
+```
+
+此时，需要删除此分支。
+```bash
+git switch master         # 删除分支前先回到主分支去（也可以去dev）
+git branch -D feature-vulcan      # 强行删除
+```
+
+##### 7.7 分支管理：多人协作
+
+- 远程分支
+
+  `git remote` 查看远程库的名称
+  
+  `git remote -v` 查看远程库的详细信息
+  
+  `git push origin branch_name`把本地分支branch_name推送到远程库
+  
+  `git switch -c dev origin/dev` 基于远程分支 `origin/dev` 创建一个新的本地分支 `dev`，并切换到这个新的本地分支。对比`git switch -c dev`
+  后者是基于本地分支创建一个新的本地分支。
+
+- 远程冲突
+
+  当推送失败时，需要先拉取远程分支的最新提交，解决冲突后再推送：
+  ```bash
+  git pull    # 拉取远程分支的最新提交
+  git add .
+  git commit -m "fix conflict"
+  git push origin dev
+  ```
+
+##### 7.8 分支管理：变基
+
+rebase 的主要作用是将一个分支的更改重新应用到另一个基础提交上。具体来说，它会先从当前分支中提取所有的提交，将其存储在临时区域，然后将当前分支重置到目标基础提交，最后将之前存储的提交依次应用到当前分支上。
+
+下面给一个案例:
+```bash
+# 假设我们有如下分支结构
+A---B---C topic
+     \
+      D---E master
+# 我们希望将 topic 分支的更改重新应用到 master 分支上，使得 topic 分支基于 master 分支的最新提交。
+           A'--B'--C' topic
+          /
+     D---E master
+# A'、B' 和 C' 是重新应用到 master 最新提交 E 之后的新提交。
+
+```
+
+### Chapter08 标签
+
+
 
