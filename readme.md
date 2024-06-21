@@ -413,5 +413,29 @@ A---B---C topic
 
 ### Chapter08 标签
 
+- 切换到需要打标签的分支。
 
+  `git switch dev`
+
+- 给最新的提交打一个标签
+
+  `git tag v1.0`
+
+- 给最新的提交打一个带说明的标签
+
+  `git tag -a <tagname> -m "blablabla..."`
+
+- 给`commit_id`的历史的提交打一个标签
+
+  `git log --pretty=oneline --abbrev-commit` 查看历史commit_id
+  
+  `git tag v0.9 commit_id`
+
+- 查看当前所有的标签
+  
+  `git tag`
+
+- 查看某个标签对应版本的详细信息
+
+  `git show tag_name`
 
