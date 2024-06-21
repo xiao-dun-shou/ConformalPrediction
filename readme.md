@@ -81,7 +81,7 @@
 | 分支（Branch）    | 表现为 `.git/refs/heads/` 目录中的文件，每个文件代表一个分支          |
 | HEAD              | 表现为 `.git/HEAD` 文件，指向当前检出的分支                          |
 
-### Chapter04: 管理修改
+### Chapter04: 修改
 
 - 查看工作区和版本库里面最新版本的区别
     
@@ -90,14 +90,98 @@
   如果你需要提交第二次修改，可以先用 `git add` 暂存第一次修改，然后再用 `git add` 暂存第二次修改，最后用 `git commit` 一次性提交所有修改。这样，两次修改会被合并成一次提交。你也可以选择先提交第一次修改，再提交第二次修改，分别用 `git add` 和 `git commit` 提交每次修改。
 
   第一次修改 -> `git add `-> 第二次修改 -> `git add` -> `git commit`
-- 撤销文件的修改（未提交的更改）：
+- 撤销文件的修改：
 
-    `git checkout -- file_name` 撤销指定文件的更改
+  `git checkout -- file_name` 
+  
+  撤销指定文件的更改，同样可以用`.`来特指全部文件。 换句话说，命令`git checkout -- readme.md`意思就是，把`readme.md`文件在工作区的修改全部撤销，这里有两种情况：
+
+  - case1: `readme.md`自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态
+
+  - case2: `readme.md`已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区时的状态。
+  对于这种情况，除了这种方法，还可以使用`reset`语句。
+    `git reset HEAD file_name`
+  
+  总之，就是让这个文件回到最近一次git commit或git add时的状态。
 
 - 删除已添加但未提交的文件：
 
-    `git rm file_name` 从暂存区删除文件
+    一般来说，有两种方法：
+  
+  - `git rm file_name` → `git commit -m "描述1"`
+  
+  - `rm test.txt`(或者在文件管理器中删除) → `git add test.txt` → `git commit -m "描述2"`
 
+  如果一个文件已经被提交到版本库，那么你永远不用担心误删，但是要小心，你只能恢复文件到最新版本，你会丢失最近一次提交后你修改的内容。
+
+### Chapter05: 添加远程仓库
+
+  你已经在本地创建了一个Git仓库后，又想在GitHub创建一个Git仓库，并且让这两个仓库进行远程同步，这样，GitHub上的仓库既可以作为备份，又可以让其他人通过该仓库来协作，真是一举多得。
+  假设你已经建立好了一个GitHub的仓库，现在，请执行下面的内容完成同步：
+
+  - 把一个已有的本地仓库与Github的仓库关联
+
+    origin是习惯性命名，公开的潜规则，表示这是远程仓库。
+    
+    `git remote add origin https://github.com/<你的账户名>/<你的仓库名>.git`
+
+  - 第一次推送
+
+    `git push -u origin master` 第一次推送会弹出授权窗口，会花费比较长的时间。
+
+  - 后续推送
+
+    `git push origin master`
+
+  - 删除关联
+
+    `git remote -v` 查看远程库信息。
+
+    `git remote rm origin` 根据远程库的名字删除连接。
+
+  
+### Chapter06: 从远程仓库克隆
+
+  想要复制别人的仓库，需要执行如下步骤：
+
+1)  获取远程仓库的URL、你可以从GitHub、GitLab或其他Git托管服务的仓库页面上找到该URL。它通常有HTTPS和SSH两种格式：
+
+    - HTTPS：`https://github.com/username/repository.git`
+
+    - SSH：`git@github.com:username/repository.git`
+  
+2) 打开终端或Git Bash
+
+    在你的计算机上打开一个终端窗口（在Windows上通常使用Git Bash）
+
+3) 导航到目标目录
+
+    使用`cd`命令导航到你希望存放克隆仓库的目录。例如：
+
+    `cd /path/to/your/directory`
+
+4) 克隆远程仓库
+
+    使用`git clone`命令克隆远程仓库。根据你的远程仓库URL选择合适的格式：
+
+    - 使用HTTPS: `git clone https://github.com/username/repository.git`
+      
+    - 使用SSH: `git clone git@github.com:username/repository.git`
+  
+
+
+5. 进入克隆的仓库目录：
+
+    克隆完成后，使用`cd repository`导航到克隆的仓库目录。
+
+6. 验证克隆结果：
+
+    可以使用`git status`命令来验证仓库的状态，确保仓库已经正确克隆到本地。
+
+注意：如果你使用HTTPS克隆私有仓库，你可能需要输入用户名和密码。如果你使用SSH克隆私有仓库，请确保你的SSH密钥已添加到Git托管服务
+
+
+### 分支
 - 查看当前分支及其状态：
 
     `git branch` 查看本地分支列表
