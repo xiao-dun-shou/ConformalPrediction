@@ -229,23 +229,32 @@
     `git pull origin branch_name` 
 
 ##### 分支冲突
-- 冲突标记格式：
-     ```text
-     <<<<<<< HEAD
-     Creating a new branch is quick & simple.
-     =======
-     Creating a new branch is quick AND simple.
-     >>>>>>> feature1
-     ```
-   - 手动编辑冲突文件并保存：
-     ```text
-     Creating a new branch is quick and simple.
-     ```
-   - 标记冲突解决并提交更改：
-     ```bash
-     git add readme.txt
-     git commit -m "conflict fixed"
-     ```
+    
+- 处理方法
+
+    当使用`git merge branch_name`时，如果发生冲突，会提示**自动合并失败**：
+    ```bash
+    Auto-merging readme.md
+    CONFLICT (content): Merge conflict in readme.md
+    Automatic merge failed; fix conflicts and then commit the result.
+    ```
+    此时，md文档中，冲突部分会出现如下标识符：
+    ```bash
+    <<<<<<< HEAD
+    你的内容1
+    你的内容2
+    你的内容3
+    >>>>>>> branch_name
+    ```
+    修改这段部分的内容为一个标准版本，即可解决冲突，修改完成后，运行如下指令，即可重新完成合并：
+    ```bash
+    git add .
+    git commit -m "commit_message"
+    git merge branch_name
+    ```
+
+- 查看处理结果
+
 
 
 
