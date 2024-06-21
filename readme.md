@@ -229,8 +229,23 @@
     `git pull origin branch_name` 
 
 ##### 分支冲突
-    
-    分支冲突处理_以这个为准
+- 冲突标记格式：
+     ```text
+     <<<<<<< HEAD
+     Creating a new branch is quick & simple.
+     =======
+     Creating a new branch is quick AND simple.
+     >>>>>>> feature1
+     ```
+   - 手动编辑冲突文件并保存：
+     ```text
+     Creating a new branch is quick and simple.
+     ```
+   - 标记冲突解决并提交更改：
+     ```bash
+     git add readme.txt
+     git commit -m "conflict fixed"
+     ```
 
 
 
