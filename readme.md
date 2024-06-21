@@ -1,15 +1,19 @@
 ### Chapter01: 创建版本库
 进入某个文件夹: 注意使用的是斜杠“/”，这一点和windows的路径不一样
-撒旦打撒打撒啊啊啊啊
+
 `cd /e/5___Study/Python/14___MMRec/jobs/ConformalPrediction`
 
 - 初始化仓库
   
     `git init`
+- 查看当前回合的修改信息
+  
+  `git status`
 - 添加文件：添加文件指令可以多次执行
 
     `git add file1.txt` <br>
-    `git add file2.txt file3.txt`
+    `git add file2.txt file3.txt` <br>
+    `git add .` 添加当前回合的所有修改到暂存区
   
 - 提交更新
   
@@ -21,9 +25,7 @@
 ### Chapter02: 创建版本库
 - 查看更新：
 
-    `git status` 查看当前回合的修改信息
-  
-    `git add .` 添加所有修改到暂存区
+    
 
     `git log -- file_name` 查看某个文件的提交历史，不指定文件会查看所有文件
 
