@@ -439,3 +439,11 @@ A---B---C topic
 
   `git show tag_name`
 
+- 删除某个本地标签
+
+  git tag -d <tagname>
+
+- 推送一个本地标签
+
+  git push origin <tagname>
+
