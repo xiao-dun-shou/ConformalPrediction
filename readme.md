@@ -202,11 +202,16 @@
 
 - 创建并切换到新分支：
 
-    `git checkout -b new_branch_name` 创建并切换到新分支，这一命令等价于：
+    `git checkout -b new_branch_name` 
+  
+    `git switch -c new_branch_name`
+  
+    上面两条命令都可以创建并切换到新分支，命令等价于下面的命令组合使用：
   
     - `git branch new_branch_name` 创建分支
     - `git checkout new_branch_name` 切换分支
-  
+    - `git switch new_branch_name` 切换分支 [最新版本]
+    
 - 合并分支到当前分支：
 
     `git merge branch_name` 合并指定分支到当前分支
