@@ -182,16 +182,31 @@
 
 
 ### 分支
+
+##### 分支的定义
+分支是Git仓库中的一个指针，指向某个提交对象。默认情况下，Git仓库只有一个主分支，通常称为 master 或 main。你可以创建新的分支以便在不影响主分支的情况下进行开发工作。
+
+##### 分支的用途
+- 并行开发：分支允许不同的开发人员在不同的功能或修复上并行工作。
+
+- 实验：分支可以用于试验新特性或重大更改，而不影响主分支的稳定性。
+
+- 代码审查和协作：分支可以用于进行代码审查和协作开发，通过Pull Request或Merge Request来合并更改。
+
+##### 分支相关命令
 - 查看当前分支及其状态：
 
-    `git branch` 查看本地分支列表
+    `git branch` 查看本地分支列表，当前分支前面会标一个`*`号。
   
     `git branch -a` 查看所有分支，包括远程分支
 
 - 创建并切换到新分支：
 
-    `git checkout -b new_branch_name` 创建并切换到新分支
-
+    `git checkout -b new_branch_name` 创建并切换到新分支，这一命令等价于：
+  
+    - `git branch new_branch_name` 创建分支
+    - `git checkout new_branch_name` 切换分支
+  
 - 合并分支到当前分支：
 
     `git merge branch_name` 合并指定分支到当前分支
