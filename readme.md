@@ -449,3 +449,6 @@ A---B---C topic
 
 ### Chapter09 .gitignore文件
 
+忽略某些文件时，需要编写`.gitignore`，`.gitignore`文件本身要放到版本库里，并且可以对.gitignore做版本管理！
+
+
